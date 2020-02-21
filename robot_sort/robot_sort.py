@@ -96,8 +96,37 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        
+        self.set_light_on()                         # Used as bubble sort's swapped variable
+
+        while self.light_is_on():                   # If something was swapped, continue going through the loop 
+            self.set_light_off()                    # Set light to off to know whether the loop should be ran again
+            while self.can_move_right():            # While we are not at the end of the list, continue going through the loop
+                self.swap_item()                    # Get rid of None object from robot's hand
+                self.move_right()                   #
+                if self.compare_item() == 1:        # if the item the robot is holding is greater than the item at position,
+                    self.swap_item()                # swap and set light to on to run through loop another time
+                    self.set_light_on()             # 
+                self.move_left()                    # Get None object back
+                self.swap_item()                    # 
+                self.move_right()                   # 
+            while self.can_move_left():             # Instead of setting position to 0, we can run through the list backwards to do the same thing
+                self.swap_item()                    # Get rid of None object from robot's hand
+                self.move_left()                    #
+                if self.compare_item() == -1:       # if the item the robot is holding is less than the item at position (because we're going backwards),
+                    self.swap_item()                # swap and set light to on to run through loop another time
+                    self.set_light_on()             # 
+                self.move_right()                   # Get rid of None object from robot's hand
+                self.swap_item()                    #
+                self.move_left()                    #
+
+        return self._list                           # Return sorted list
+
+
+
+
+
+
 
 
 if __name__ == "__main__":
